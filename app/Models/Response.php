@@ -24,7 +24,7 @@ class Response extends Model
 
     public function people()
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(Person::class);
     }
 
     public function survey()
