@@ -19,6 +19,8 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\FileUpload;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class SurveyResource extends Resource
 {
@@ -39,6 +41,26 @@ class SurveyResource extends Resource
                         Forms\Components\TextInput::make('name')->required(),
                         Hidden::make('user_id')->default(Filament::auth()->id()),
                         Forms\Components\Textarea::make('description')->rows(5)->columns(20),
+                        Forms\Components\FileUpload::make('miniature')
+                        ->image()
+                        ->getUploadedFileNameForStorageUsing
+                        (function ($file, $record) {
+                            return 'thumbnail-survey-' . ($record?->id ?? uniqid()) . '.' . $file->getClientOriginalExtension();
+                        })
+                        ->disk('public')
+                        ->visibility('public')
+                        ->imagePreviewHeight('250px')
+                        ->directory('thumbnails')
+                        ->label('Thumbnail')
+                        ->required(false)
+                        ->previewable(true)
+                        ->imageEditor()
+                        ->imageEditorAspectRatios([
+                            null,
+                            '16:9',
+                            '4:3',
+                            '1:1',
+                        ]),
                         Grid::make(2)
                             ->schema([
                                 Forms\Components\DateTimePicker::make('start_date')
