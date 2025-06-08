@@ -8,7 +8,8 @@
                 <x-survey-card 
                     :name="$survey->name" 
                     :description="$survey->description" 
-                    :miniature="$survey->miniature" />
+                    :miniature="$survey->miniature"
+                    :survey="$survey" />
             @empty
                 <div class="text-center text-neutral-200">
                     No hay encuestas disponibles.

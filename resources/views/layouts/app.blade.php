@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
-<body class="bg-gradient-to-br from-slate-700 via-slate-800 to slate-700 dark:bg-gray-900">
+<body class="min-h-screen bg-gradient-to-br from-slate-700 via-slate-800 to-slate-700 dark:bg-gray-900">
     <main>
         @yield('content')
     </main>
+    @livewireScripts
 </body>
 </html> 
